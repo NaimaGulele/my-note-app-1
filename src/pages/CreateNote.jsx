@@ -18,13 +18,19 @@ const CreateNote = ({setNotes}) => {
 
       if (title && details) {
         const note = {id: uuid(), title, details, date}
+        console.log('New Note', note); // Debug: log the new note
         // add this note to the Notes array
-        setNotes(prevNotes => [note, ...prevNotes] )
         
+        setNotes(prevNotes => {
+           const newNotes = [note, ...prevNotes] 
+           console.log('Updated Notes:', newNotes);
+        return newNotes;
         // redirect to home page
+        });
+
         navigate('/')
       }
-    }
+    };
   
     return (
     <section>
