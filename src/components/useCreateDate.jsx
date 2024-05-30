@@ -25,7 +25,7 @@ const useCreateDate = () => {
         break;
         case 10: monthName = "Nov";
         break;
-        case 11: monthName = "Dec"
+        case 11: monthName = "Dec";
         break;
         default: monthName = "Unknown";
     }
