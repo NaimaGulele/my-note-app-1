@@ -12,4 +12,4 @@ const Noteitem = ({ note }) => {
   )
 }
 
-export default Noteitem
+export default Noteitem;

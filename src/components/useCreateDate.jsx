@@ -30,8 +30,11 @@ const useCreateDate = () => {
         default: monthName = "Unknown";
     }
 
+    const minutes = dateObj.getMinutes();
+    // eslint-disable-next-line
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
     
-    const date = `${monthName} ${ dateObj.getDate()}, ${dateObj.getFullYear()} [${dateObj.getHours()}:${dateObj.getMinutes}] `
+    const date = `${monthName} ${ dateObj.getDate()}, ${dateObj.getFullYear()} [${dateObj.getHours()}:${dateObj.getMinutes()}]`;
 
     return date;
 
