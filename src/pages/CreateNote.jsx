@@ -46,4 +46,4 @@ const CreateNote = ({setNotes}) => {
   )
 }
 
-export default CreateNote
+export default CreateNote;

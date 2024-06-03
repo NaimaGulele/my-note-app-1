@@ -3,18 +3,24 @@ import React, { useState, useEffect } from 'react';
 import { IoIosArrowBack } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useParams, useNavigate } from 'react-router-dom';
+import useCreateDate from "../components/useCreateDate";
 
 const EditNote = ({ notes, setNotes }) => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const date = useCreateDate();
+
   const noteToEdit = notes.find(note => note.id === id);
+
+  const [title, setTitle] = useState(noteToEdit ? noteToEdit.title : '');
+  const [details, setDetails] = useState(noteToEdit ? noteToEdit.details : '');
 
   useEffect(() => {
     console.log('EditNote component rendered.');
     console.log('notes:', notes);
     console.log('setNotes:', setNotes);
     console.log('noteToEdit:', noteToEdit);
-    
+
     if (!noteToEdit) {
       navigate('/');
     }
@@ -24,7 +30,7 @@ const EditNote = ({ notes, setNotes }) => {
     e.preventDefault();
     console.log('Save button clicked.');
 
-    const updatedNote = { ...noteToEdit, title, details };
+    const updatedNote = { ...noteToEdit, title, details, date };
     const updatedNotes = notes.map(note => note.id === id ? updatedNote : note);
     setNotes(updatedNotes);
     navigate('/');
@@ -33,13 +39,13 @@ const EditNote = ({ notes, setNotes }) => {
   const handleDelete = () => {
     console.log('Delete button clicked.');
 
-    const updatedNotes = notes.filter(note => note.id !== id);
-    setNotes(updatedNotes);
-    navigate('/');
+    const confirmMessage = `Are you sure you want to delete the note titled "${noteToEdit.title}"?`;
+    if (window.confirm(confirmMessage)) {
+      const updatedNotes = notes.filter(note => note.id !== id);
+      setNotes(updatedNotes);
+      navigate('/');
+    }
   };
-
-  const [title, setTitle] = useState(noteToEdit ? noteToEdit.title : '');
-  const [details, setDetails] = useState(noteToEdit ? noteToEdit.details : '');
 
   return (
     <section>
