@@ -14,31 +14,24 @@ const EditNote = ({ notes, setNotes }) => {
 
   const [title, setTitle] = useState(noteToEdit ? noteToEdit.title : '');
   const [details, setDetails] = useState(noteToEdit ? noteToEdit.details : '');
+  const [reminder, setReminder] = useState(noteToEdit ? noteToEdit.reminder : '');
 
   useEffect(() => {
-    console.log('EditNote component rendered.');
-    console.log('notes:', notes);
-    console.log('setNotes:', setNotes);
-    console.log('noteToEdit:', noteToEdit);
-
     if (!noteToEdit) {
       navigate('/');
     }
-  }, [notes, setNotes, noteToEdit, navigate]);
+  }, [noteToEdit, navigate]);
 
   const handleSave = (e) => {
     e.preventDefault();
-    console.log('Save button clicked.');
 
-    const updatedNote = { ...noteToEdit, title, details, date };
+    const updatedNote = { ...noteToEdit, title, details, date, reminder };
     const updatedNotes = notes.map(note => note.id === id ? updatedNote : note);
     setNotes(updatedNotes);
     navigate('/');
   };
 
   const handleDelete = () => {
-    console.log('Delete button clicked.');
-
     const confirmMessage = `Are you sure you want to delete the note titled "${noteToEdit.title}"?`;
     if (window.confirm(confirmMessage)) {
       const updatedNotes = notes.filter(note => note.id !== id);
@@ -55,19 +48,9 @@ const EditNote = ({ notes, setNotes }) => {
         <button className="btn danger" onClick={handleDelete}><RiDeleteBin6Line /></button>
       </header>
       <form className="create-note__form" onSubmit={handleSave}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          autoFocus
-        />
-        <textarea
-          rows={28}
-          placeholder="Note details..."
-          value={details}
-          onChange={(e) => setDetails(e.target.value)}
-        ></textarea>
+        <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} autoFocus />
+        <textarea rows={28} placeholder="Note details..." value={details} onChange={(e) => setDetails(e.target.value)}></textarea>
+        <input type="datetime-local" value={reminder} onChange={(e) => setReminder(e.target.value)} />
       </form>
     </section>
   );

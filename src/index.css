@@ -215,4 +215,8 @@ h2 {
         bottom: 6%;
         right: 2rem;
     }
-}
+    .note-item .reminder {
+        color: #ff0000; /* Red color for reminder */
+        font-weight: bold;
+      }
+    }    
