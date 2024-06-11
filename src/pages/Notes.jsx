@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsPlusLg } from 'react-icons/bs';
 import Noteitem from '../components/Noteitem';
+import './Notes.css'; // import CSS for overall Notes styling
 
 const Notes = ({ notes, setNotes }) => {
   const [showSearch, setShowSearch] = useState(false);

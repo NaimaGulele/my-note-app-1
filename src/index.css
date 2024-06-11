@@ -21,7 +21,7 @@ body {
     display: grid;
     place-items: center;
     color: var(--color-white);
-    background: #ccc;
+    background: #282c34; /* Reverted background color to original */
     line-height: 1.5;
 }
 
@@ -67,7 +67,7 @@ body {
     display: none;
 }
 
-h2,  h4 {
+h2, h4 {
     font-weight: 500;
 }
 
@@ -75,21 +75,15 @@ h2 {
     font-size: 2rem;
 }
 
-
-
-
-
-
 /* NOTES PAGE */
 .notes__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1.6rem 1.5rem;
-    background: var(--color-bg-black);
+    padding: 16px;
+    background: var(--color-bg-dark);
     z-index: 9;
 }
-
 
 .notes__header input {
     padding: 0.7rem 1rem;
@@ -106,7 +100,6 @@ h2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.2rem;
-
 }
 
 .empty__notes {
@@ -156,10 +149,6 @@ h2 {
     padding: 1rem;
 }
 
-
-
-
-
 /* CREATE NOTE & EDIT NOTE PAGE */
 .create-note__header {
     display: flex;
@@ -186,37 +175,20 @@ h2 {
 .create-note__form input {
     font-size: 2rem;
 }
-
-
-/* MEDIA QUERIES FOR PHONES */
-@media screen and (max-width: 600px) {
-    #app {
-        width: 100vw;
-        height: 100vh;
-        padding: 2rem 1rem;
-    }
-
-    .notes__header {
-        width: 100%;
-        padding: 2rem 1rem;
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-
-    .notes__container {
-        margin-top: 5rem;
-        gap: 1rem;
-    }
-
-    .btn.add__btn {
-        padding: 1.5rem;
-        font-size: 1.5rem;
-        bottom: 6%;
-        right: 2rem;
-    }
-    .note-item .reminder {
-        color: #ff0000; /* Red color for reminder */
-        font-weight: bold;
-      }
-    }    
+.reminder-container {
+    margin-top: 1rem;
+  }
+  
+  .reminder-container label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .reminder-container input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 1rem;
+  }

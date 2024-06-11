@@ -26,7 +26,8 @@ const EditNote = ({ notes, setNotes }) => {
     e.preventDefault();
 
     const updatedNote = { ...noteToEdit, title, details, date, reminder };
-    const updatedNotes = notes.map(note => note.id === id ? updatedNote : note);
+    const filteredNotes = notes.filter(note => note.id !== id);
+    const updatedNotes = [updatedNote, ...filteredNotes];
     setNotes(updatedNotes);
     navigate('/');
   };

@@ -1,12 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Noteitem = ({ note, onDelete }) => {
-  const handleDeleteClick = (e) => {
-    e.preventDefault(); // Prevent the link from being followed
-    onDelete(note.id);
-  };
 
+const Noteitem = ({ note }) => {
   const formatReminder = (reminder) => {
     if (!reminder) return '';
     const reminderDate = new Date(reminder);
@@ -26,7 +22,6 @@ const Noteitem = ({ note, onDelete }) => {
         <p>{note.date}</p>
         {note.reminder && <p className="reminder">{formatReminder(note.reminder)}</p>}
       </Link>
-      <button onClick={handleDeleteClick}>Delete</button>
     </div>
   );
 };

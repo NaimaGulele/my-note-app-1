@@ -1,8 +1,10 @@
+// src/components/CreateNote.js
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from 'react-icons/io';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import useCreateDate from "../components/useCreateDate";
+import { scheduleReminder } from '../api'; // Import the scheduleReminder function
 
 const CreateNote = ({ setNotes }) => {
   const [title, setTitle] = useState('');
@@ -11,7 +13,7 @@ const CreateNote = ({ setNotes }) => {
   const date = useCreateDate();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (title && details) {
@@ -23,6 +25,15 @@ const CreateNote = ({ setNotes }) => {
         console.log('Updated Notes:', newNotes);
         return newNotes;
       });
+
+      if (reminder) {
+        try {
+          await scheduleReminder(title, reminder);
+          console.log('Reminder scheduled successfully');
+        } catch (error) {
+          console.error('Failed to schedule reminder', error);
+        }
+      }
 
       navigate('/');
     }
@@ -37,7 +48,10 @@ const CreateNote = ({ setNotes }) => {
       <form className="create-note__form" onSubmit={handleSubmit}>
         <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
         <textarea rows={28} placeholder="Note details..." value={details} onChange={(e) => setDetails(e.target.value)}></textarea>
-        <input type="datetime-local" value={reminder} onChange={(e) => setReminder(e.target.value)} />
+        <div className="reminder-container">
+          <label htmlFor="reminder">Set Reminder:</label>
+          <input id="reminder" type="datetime-local" value={reminder} onChange={(e) => setReminder(e.target.value)} />
+        </div>
       </form>
     </section>
   );
